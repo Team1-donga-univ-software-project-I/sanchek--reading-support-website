@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { LoginTemplate } from "../components/templates/login-template";
+// import { LoginTemplate } from "../components/templates/login-template";
 
 export const LoginPage = () => {
   return (
     <LoginPageContainer>
-      <LoginTemplate />
+      <div>login</div>
     </LoginPageContainer>
   );
 };

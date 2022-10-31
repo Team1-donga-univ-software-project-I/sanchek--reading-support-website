@@ -1,6 +1,7 @@
+import React from "react";
 import { Reset } from "styled-reset";
-import { MainRouters } from "./routers/router";
 import "./assets/fonts/FontStyles.css";
+import { MainRouters } from "./routers/router";
 
 export const App = () => {
   return (
