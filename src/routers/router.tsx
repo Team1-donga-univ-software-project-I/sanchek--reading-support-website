@@ -1,31 +1,10 @@
+import { useReactiveVar } from "@apollo/client";
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { NotFound } from "../pages/404";
-import { LoginPage } from "../pages/login-page";
-import { MainPage } from "../pages/main-page";
-
-const MainRoutes = [
-  {
-    path: "/",
-    component: <MainPage />,
-  },
-  {
-    path: "/login",
-    component: <LoginPage />,
-  },
-];
+import { isLoggedInVar } from "../apollo";
+import { LoggedInRouter } from "./logged-in-router";
+import { LoggedOutRouter } from "./logged-out-router";
 
 export const MainRouters = () => {
-  return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          {MainRoutes.map(route => (
-            <Route key={route.path} path={route.path} element={route.component} />
-          ))}
-          <Route path="/*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </>
-  );
+  const isLoggedIn = useReactiveVar(isLoggedInVar);
+  return isLoggedIn ? <LoggedInRouter /> : <LoggedOutRouter />;
 };

@@ -33,8 +33,8 @@ module.exports = {
   // 로더 설정
   module: {
     rules: [
-      // jsx 해석을 위한 babel로더 설정
       {
+        // babel-loader
         test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: "babel-loader",
@@ -45,6 +45,11 @@ module.exports = {
           // dev server을 위한 설정
           plugins: ["react-refresh/babel"],
         },
+      },
+      {
+        // file-loader
+        test: /\.(png|jpg|gif|svg)$/, // 확장자가 png, jpg, gif, svg인것에 대해서만 등록
+        loader: "file-loader",
       },
     ],
   },
