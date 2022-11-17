@@ -4,10 +4,11 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { FormError } from "./form-error";
+import { loginMutation, loginMutationVariables } from "../__generated__/loginMutation";
 
 const LOGIN_MUTATION = gql`
-  mutation LoginMutation($email: String!, $password: String!) {
-    login(input: { email: $email, password: $password }) {
+  mutation loginMutation($loginInput: LoginInput!) {
+    login(input: $loginInput) {
       ok
       token
       error
@@ -18,6 +19,7 @@ const LOGIN_MUTATION = gql`
 interface LoginFormInterface {
   email: string;
   password: string;
+  resultError?: string;
 }
 
 export const LoginForm = () => {
@@ -28,19 +30,32 @@ export const LoginForm = () => {
     formState: { errors },
   } = useForm<LoginFormInterface>();
 
-  const [loginMutation] = useMutation(LOGIN_MUTATION);
+  const onCompleted = (data: loginMutation) => {
+    const {
+      login: { ok, token },
+    } = data;
+    if (ok) {
+      console.log(token);
+    }
+  };
+
+  const [loginMutation, { data: loginMutationResult, loading }] = useMutation<loginMutation, loginMutationVariables>(
+    LOGIN_MUTATION,
+    { onCompleted },
+  );
 
   const onSubmit = async () => {
-    const { email, password } = getValues();
-    const {
-      data: { login },
-    } = await loginMutation({
-      variables: {
-        email,
-        password,
-      },
-    });
-    console.log(login.token);
+    if (!loading) {
+      const { email, password } = getValues();
+      await loginMutation({
+        variables: {
+          loginInput: {
+            email,
+            password,
+          },
+        },
+      });
+    }
   };
 
   return (
@@ -65,7 +80,8 @@ export const LoginForm = () => {
         placeholder="Password"
       />
       {errors.password?.message && <FormError errorMessage={errors.password?.message} />}
-      <LoginSubmitButton>로그인</LoginSubmitButton>
+      <LoginSubmitButton disabled={loading}>{loading ? "Loading..." : "Log In"}</LoginSubmitButton>
+      {loginMutationResult?.login.error && <FormError errorMessage={loginMutationResult.login.error} />}
       <LoginToSignInLink to="/sign-in">회원가입</LoginToSignInLink>
     </LoginFormContainer>
   );
