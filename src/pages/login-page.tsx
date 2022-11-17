@@ -12,10 +12,10 @@ export const LoginPage: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>로그인 - 산책</title>
+        <title>산책 | 로그인</title>
       </Helmet>
       <LoginPageContainer>
-        <LogoBox width={200} />
+        <LogoBox width={"200px"} />
         <LoginForm />
       </LoginPageContainer>
     </>

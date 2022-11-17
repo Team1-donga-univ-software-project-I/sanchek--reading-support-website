@@ -4,12 +4,12 @@ import styled from "styled-components";
 import logoImg from "../assets/images/logo.png";
 
 interface IProps {
-  width: number;
+  width: string;
 }
 
 export const LogoBox = ({ width }: IProps) => {
   return (
-    <LogoContainer>
+    <LogoContainer width={width}>
       <LogoLink to="/">
         <LogoSrc src={logoImg} alt="logoSrc" width={width} />
       </LogoLink>
@@ -17,8 +17,8 @@ export const LogoBox = ({ width }: IProps) => {
   );
 };
 
-const LogoContainer = styled.div`
-  width: 100%;
+const LogoContainer = styled.div<IProps>`
+  width: ${props => props.width};
   display: flex;
   justify-content: center;
 `;

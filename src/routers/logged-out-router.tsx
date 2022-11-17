@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { NotFound } from "../pages/404";
 import { LoginPage } from "../pages/login-page";
 import { MainPage } from "../pages/main-page";
-import { SignInPage } from "../pages/sign-in-page";
+import { SignInPage } from "../pages/signin-page";
 
 const MainRoutes = [
   {
