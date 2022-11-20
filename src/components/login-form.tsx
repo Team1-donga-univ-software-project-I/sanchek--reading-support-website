@@ -1,10 +1,12 @@
 import { gql, useMutation } from "@apollo/client";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { FormError } from "./form-error";
 import { loginMutation, loginMutationVariables } from "../__generated__/loginMutation";
+import { authTokenVar, isLoggedInVar } from "../apollo";
+import { LOCALSTORAGE_TOKEN } from "../constants";
 
 const LOGIN_MUTATION = gql`
   mutation loginMutation($loginInput: LoginInput!) {
@@ -30,12 +32,17 @@ export const LoginForm = () => {
     formState: { errors },
   } = useForm<LoginFormInterface>();
 
+  const nagative = useNavigate();
+
   const onCompleted = (data: loginMutation) => {
     const {
       login: { ok, token },
     } = data;
-    if (ok) {
-      console.log(token);
+    if (ok && token) {
+      localStorage.setItem(LOCALSTORAGE_TOKEN, token);
+      authTokenVar(token);
+      isLoggedInVar(true);
+      nagative("/", { replace: true });
     }
   };
 

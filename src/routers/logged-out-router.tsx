@@ -5,7 +5,7 @@ import { LoginPage } from "../pages/login-page";
 import { MainPage } from "../pages/main-page";
 import { SignInPage } from "../pages/signin-page";
 
-const MainRoutes = [
+const LoggedOutRoutes = [
   {
     path: "/",
     component: <MainPage />,
@@ -25,7 +25,7 @@ export const LoggedOutRouter = () => {
     <>
       <BrowserRouter>
         <Routes>
-          {MainRoutes.map(route => (
+          {LoggedOutRoutes.map(route => (
             <Route key={route.path} path={route.path} element={route.component} />
           ))}
           <Route path="/*" element={<NotFound />} />

@@ -2,7 +2,8 @@ import React from "react";
 import { gql, useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { createAccountMutation, createAccountMutationVariables } from "../__generated__/createAccountMutation";
 
 const CREATE_ACCOUNT_MUTATION = gql`
   mutation createAccountMutation($createAccountInput: CreateAccountInput!) {
@@ -20,18 +21,37 @@ interface CreateAccountFormInterface {
 }
 
 export const SignInForm = () => {
-  const {
-    register,
-    getValues,
-    watch,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<CreateAccountFormInterface>({
+  const { register, getValues, handleSubmit } = useForm<CreateAccountFormInterface>({
     mode: "onChange",
   });
-  const [createAccountMutation, { loading }] = useMutation(CREATE_ACCOUNT_MUTATION);
+
+  const nagative = useNavigate();
+
+  const onCompleted = (data: createAccountMutation) => {
+    const {
+      createAccount: { ok },
+    } = data;
+    if (ok) {
+      nagative("/login", { replace: true });
+    }
+  };
+
+  const [createAccountMutation, { loading, data: creataAccountMutationResult }] = useMutation<
+    createAccountMutation,
+    createAccountMutationVariables
+  >(CREATE_ACCOUNT_MUTATION, {
+    onCompleted,
+  });
+
   const onSubmit = () => {
-    console.log(watch());
+    if (!loading) {
+      const { email, password, nickname } = getValues();
+      createAccountMutation({
+        variables: {
+          createAccountInput: { email, password, nickname },
+        },
+      });
+    }
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
