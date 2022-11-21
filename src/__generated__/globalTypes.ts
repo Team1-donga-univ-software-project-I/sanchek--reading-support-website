@@ -13,6 +13,23 @@ export interface CreateAccountInput {
   nickname: string;
 }
 
+export interface CreateSanchekInput {
+  title: string;
+  content: string;
+  isOpend: boolean;
+  bookName?: string | null;
+}
+
+export interface EditProfileInput {
+  email?: string | null;
+  password?: string | null;
+  nickname?: string | null;
+}
+
+export interface FindSanchekByUserInput {
+  page?: number | null;
+}
+
 export interface LoginInput {
   email: string;
   password: string;

@@ -36,12 +36,12 @@ export const SignInForm = () => {
     }
   };
 
-  const [createAccountMutation, { loading, data: creataAccountMutationResult }] = useMutation<
-    createAccountMutation,
-    createAccountMutationVariables
-  >(CREATE_ACCOUNT_MUTATION, {
-    onCompleted,
-  });
+  const [createAccountMutation, { loading }] = useMutation<createAccountMutation, createAccountMutationVariables>(
+    CREATE_ACCOUNT_MUTATION,
+    {
+      onCompleted,
+    },
+  );
 
   const onSubmit = () => {
     if (!loading) {
