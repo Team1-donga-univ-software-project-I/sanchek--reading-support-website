@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { NotFound } from "../pages/404";
 import { MyProfile } from "../pages/my-profile";
 import { MainUserPage } from "../pages/main-user";
+import { WriteSanchek } from "../pages/write-sanchek";
 
 const LoggedInRoutes = [
   {
@@ -12,6 +13,10 @@ const LoggedInRoutes = [
   {
     path: "/my-profile",
     component: <MyProfile />,
+  },
+  {
+    path: "/write",
+    component: <WriteSanchek />,
   },
 ];
 
