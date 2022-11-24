@@ -3,7 +3,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { NotFound } from "../pages/404";
 import { LoginPage } from "../pages/login-page";
 import { MainPage } from "../pages/main-page";
-import { SignInPage } from "../pages/signin-page";
+import { SignUpPage } from "../pages/signup-page";
+import { SupportPage } from "../pages/support-page";
 
 const LoggedOutRoutes = [
   {
@@ -15,22 +16,24 @@ const LoggedOutRoutes = [
     component: <LoginPage />,
   },
   {
-    path: "/sign-in",
-    component: <SignInPage />,
+    path: "/sign-up",
+    component: <SignUpPage />,
+  },
+  {
+    path: "/support",
+    component: <SupportPage />,
   },
 ];
 
 export const LoggedOutRouter = () => {
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          {LoggedOutRoutes.map(route => (
-            <Route key={route.path} path={route.path} element={route.component} />
-          ))}
-          <Route path="/*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <Routes>
+        {LoggedOutRoutes.map(route => (
+          <Route key={route.path} path={route.path} element={route.component} />
+        ))}
+        <Route path="/*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
   );
 };

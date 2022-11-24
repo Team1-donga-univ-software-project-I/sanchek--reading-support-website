@@ -1,9 +1,11 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { NotFound } from "../pages/404";
 import { MyProfile } from "../pages/my-profile";
 import { MainUserPage } from "../pages/main-user";
 import { WriteSanchek } from "../pages/write-sanchek";
+import { NotFound } from "../pages/404";
+import { SupportPage } from "../pages/support-page";
+import { SanchekPage } from "../pages/sanchek";
 
 const LoggedInRoutes = [
   {
@@ -17,6 +19,14 @@ const LoggedInRoutes = [
   {
     path: "/write",
     component: <WriteSanchek />,
+  },
+  {
+    path: "/support",
+    component: <SupportPage />,
+  },
+  {
+    path: "/sanchek/:id",
+    component: <SanchekPage />,
   },
 ];
 

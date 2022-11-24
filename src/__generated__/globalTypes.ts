@@ -7,6 +7,10 @@
 // START Enums and Input Objects
 //==============================================================
 
+export interface AllSancheksInput {
+  page?: number | null;
+}
+
 export interface CreateAccountInput {
   email: string;
   password: string;
@@ -33,6 +37,10 @@ export interface FindSanchekByUserInput {
 export interface LoginInput {
   email: string;
   password: string;
+}
+
+export interface SanchekInput {
+  sanchekId: number;
 }
 
 //==============================================================

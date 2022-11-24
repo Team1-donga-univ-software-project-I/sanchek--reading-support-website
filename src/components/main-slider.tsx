@@ -3,22 +3,35 @@ import Slider from "react-slick";
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Link } from "react-router-dom";
 
 export const MainSlider = () => {
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 7000,
   };
 
   return (
     <>
       <SliderContainer {...settings}>
-        <Card>123</Card>
-        <Card>456</Card>
-        <Card>789</Card>
+        <Card>
+          <CardContent>
+            <CardLink to="#">123</CardLink>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent>
+            <CardLink to="#">456</CardLink>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent>
+            <CardLink to="#">789</CardLink>
+          </CardContent>
+        </Card>
       </SliderContainer>
     </>
   );
@@ -26,10 +39,9 @@ export const MainSlider = () => {
 
 const SliderContainer = styled(Slider)`
   height: 100%;
-  & div {
+  div {
     height: 100%;
   }
-
   .slick-prev {
     left: 25px;
     z-index: 1;
@@ -41,7 +53,26 @@ const SliderContainer = styled(Slider)`
 `;
 
 const Card = styled.div`
-  background-color: red;
-  width: 80%;
+  background-color: #efd345;
+`;
+
+const CardContent = styled.span`
+  background-color: #ffef82;
+  width: 50%;
+  height: 90%;
+  margin: auto;
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+`;
+
+const CardLink = styled(Link)`
+  width: 100%;
   height: 100%;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
