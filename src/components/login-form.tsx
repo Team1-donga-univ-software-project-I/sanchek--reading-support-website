@@ -1,7 +1,7 @@
 import { gql, useMutation } from "@apollo/client";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { FormError } from "./form-error";
 import { loginMutation, loginMutationVariables } from "../__generated__/loginMutation";
@@ -89,7 +89,6 @@ export const LoginForm = () => {
       {errors.password?.message && <FormError errorMessage={errors.password?.message} />}
       <LoginSubmitButton disabled={loading}>{loading ? "Loading..." : "Log In"}</LoginSubmitButton>
       {loginMutationResult?.login.error && <FormError errorMessage={loginMutationResult.login.error} />}
-      <LoginToSignInLink to="/sign-in">회원가입</LoginToSignInLink>
     </LoginFormContainer>
   );
 };
@@ -124,5 +123,3 @@ const LoginPasswordInput = styled.input`
 `;
 
 const LoginSubmitButton = styled.button``;
-
-const LoginToSignInLink = styled(Link)``;

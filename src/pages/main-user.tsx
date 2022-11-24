@@ -6,6 +6,7 @@ import { LoggedInSideBar } from "../components/logged-in-sidebar";
 import { MainSlider } from "../components/main-slider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenNib } from "@fortawesome/free-solid-svg-icons";
+import { MainSancheksList } from "../components/main-sancheks-list";
 
 export const MainUserPage = () => {
   return (
@@ -19,6 +20,7 @@ export const MainUserPage = () => {
           <SliderContainer>
             <MainSlider />
           </SliderContainer>
+          <MainSancheksList />
           <WriteSanchekButton to="/write">
             <FontAwesomeIcon icon={faPenNib} />
           </WriteSanchekButton>
@@ -39,7 +41,7 @@ const LoggedInMainContainer = styled.section`
   width: 100%;
   display: flex;
   flex-direction: column;
-  background-color: green;
+  background-color: #cccccc;
   align-items: center;
 `;
 
@@ -47,6 +49,8 @@ const SliderContainer = styled.div`
   width: 90%;
   max-width: 900px;
   height: 300px;
+  margin-top: 20px;
+  margin-bottom: 70px;
 `;
 
 const WriteSanchekButton = styled(Link)`
