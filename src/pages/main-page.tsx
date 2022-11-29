@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { Suspense, useRef } from "react";
 import { Helmet } from "react-helmet-async";
 import styled from "styled-components";
 import { LoggedOutNavbar } from "../components/logged-out-navbar";
@@ -27,16 +27,18 @@ export const MainPage = () => {
       </Helmet>
       <LoggedOutNavbar onHomeClick={onHomeClick} onAboutClick={onAboutClick} onNewsClick={onNewsClick} />
       <MainPageContainer>
-        <HomeSection ref={homeRef}>
-          <HomeContent>
-            <HomeTitle>
-              독서를 기록하고
-              <br />
-              업적을 완료해 보세요
-            </HomeTitle>
-            <HomeJoinLink to="sign-up">JOIN ME!</HomeJoinLink>
-          </HomeContent>
-        </HomeSection>
+        <Suspense>
+          <HomeSection ref={homeRef}>
+            <HomeContent>
+              <HomeTitle>
+                독서를 기록하고
+                <br />
+                업적을 완료해 보세요
+              </HomeTitle>
+              <HomeJoinLink to="sign-up">JOIN ME!</HomeJoinLink>
+            </HomeContent>
+          </HomeSection>
+        </Suspense>
         <AboutSection ref={aboutRef}>ABOUT</AboutSection>
         <NewsSection ref={newsRef}>NEWS</NewsSection>
       </MainPageContainer>

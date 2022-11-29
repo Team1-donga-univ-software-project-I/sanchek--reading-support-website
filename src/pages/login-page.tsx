@@ -1,7 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { LoginForm } from "../components/login-form";
 import { LogoBox } from "../components/logo-box";
 
@@ -60,6 +60,7 @@ const LogoContainer = styled.header`
 
 const LoginTitle = styled.h1`
   font-family: "Poppins", sans-serif;
+  font-weight: 700;
   width: 370px;
   margin: 0 auto 20px auto;
   font-size: 30pt;
@@ -71,7 +72,7 @@ const LoginContent = styled.div`
   width: 370px;
   margin: 0 auto 20px auto;
   font-size: 15pt;
-  margin-bottom: 70px;
+  margin-bottom: 50px;
 `;
 
 const SignUpText = styled.footer`
@@ -87,9 +88,30 @@ const SignUpTextContent = styled.p`
   color: #a7a7a7;
 `;
 
+const LinkHover = keyframes`
+  0% {
+    transform: translateX(0px);
+  }
+  25% {
+    transform: translateX(3px);
+  }
+  50% {
+    transform: translateX(0px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+`;
+
 const LinkToSignUp = styled(Link)`
   color: #82954b;
   font-weight: 800;
   text-decoration: none;
   margin-bottom: 50px;
+  &:hover {
+    animation: ${LinkHover} 1s ease-in-out;
+  }
 `;

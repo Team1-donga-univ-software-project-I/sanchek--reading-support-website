@@ -17,11 +17,11 @@ export const LoggedOutNavbar = ({ onHomeClick, onAboutClick, onNewsClick }: Navb
       </LogoBoxContainer>
       <NavbarNavigation>
         <NavbarNavigationList>
-          <li onClick={onHomeClick}>HOME</li>
-          <li onClick={onAboutClick}>ABOUT</li>
-          <li onClick={onNewsClick}>NEWS</li>
+          <ListPointer onClick={onHomeClick}>HOME</ListPointer>
+          <ListPointer onClick={onAboutClick}>ABOUT</ListPointer>
+          <ListPointer onClick={onNewsClick}>NEWS</ListPointer>
           <li>
-            <NoneStyledLink to="/support">GUIDES</NoneStyledLink>
+            <NoneStyledLink to="/support">GUIDES↗</NoneStyledLink>
           </li>
           <SocialLinkPopup>
             Social↗
@@ -90,6 +90,10 @@ const JoinButtonForLogin = styled(Link)`
     border-color: #8fc866;
     color: #fff;
   }
+`;
+
+const ListPointer = styled.li`
+  cursor: pointer;
 `;
 
 const SocialLinkPopup = styled.li`

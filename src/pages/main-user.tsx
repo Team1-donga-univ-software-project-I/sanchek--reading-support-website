@@ -3,7 +3,6 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { LoggedInSideBar } from "../components/logged-in-sidebar";
-import { MainSlider } from "../components/main-slider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenNib } from "@fortawesome/free-solid-svg-icons";
 import { MainSancheksList } from "../components/main-sancheks-list";
@@ -17,9 +16,6 @@ export const MainUserPage = () => {
       <LoggedInMainPage>
         <LoggedInSideBar />
         <LoggedInMainContainer>
-          <SliderContainer>
-            <MainSlider />
-          </SliderContainer>
           <MainSancheksList />
           <WriteSanchekButton to="/write">
             <FontAwesomeIcon icon={faPenNib} />
@@ -34,6 +30,9 @@ const LoggedInMainPage = styled.main`
   display: flex;
   flex-direction: row;
   width: 100vw;
+  background: linear-gradient(217deg, rgba(161, 255, 206, 0.8), rgba(255, 0, 0, 0) 30.71%),
+    linear-gradient(127deg, rgba(253, 231, 140, 0.984), rgba(0, 255, 0, 0) 50.71%),
+    linear-gradient(336deg, rgba(255, 255, 255, 0), rgba(0, 0, 255, 0) 70.71%);
 `;
 
 const LoggedInMainContainer = styled.section`
@@ -41,16 +40,7 @@ const LoggedInMainContainer = styled.section`
   width: 100%;
   display: flex;
   flex-direction: column;
-  background-color: #cccccc;
   align-items: center;
-`;
-
-const SliderContainer = styled.div`
-  width: 90%;
-  max-width: 900px;
-  height: 300px;
-  margin-top: 20px;
-  margin-bottom: 70px;
 `;
 
 const WriteSanchekButton = styled(Link)`
@@ -65,8 +55,13 @@ const WriteSanchekButton = styled(Link)`
   justify-content: center;
   align-items: center;
   text-decoration: none;
+  transition: rotate 0.6s ease-in-out;
+  color: white;
   &:visited {
     text-decoration: none;
-    color: black;
+    color: white;
+  }
+  &:hover {
+    rotate: 360deg;
   }
 `;

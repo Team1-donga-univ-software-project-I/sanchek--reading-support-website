@@ -17,9 +17,11 @@ export interface allSanchekQuery_allSancheks_results_author {
 
 export interface allSanchekQuery_allSancheks_results {
   __typename: "Sanchek";
+  id: number;
   title: string;
   content: string;
   author: allSanchekQuery_allSancheks_results_author;
+  createdAt: any;
 }
 
 export interface allSanchekQuery_allSancheks {
