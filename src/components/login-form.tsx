@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { FormError } from "./form-error";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
 import { loginMutation, loginMutationVariables } from "../__generated__/loginMutation";
 import { authTokenVar, isLoggedInVar } from "../apollo";
 import { LOCALSTORAGE_TOKEN } from "../constants";
@@ -67,27 +69,32 @@ export const LoginForm = () => {
 
   return (
     <LoginFormContainer onSubmit={handleSubmit(onSubmit)}>
-      <LoginEmailInput
-        {...register("email", {
-          required: "Email is required",
-        })}
-        name="email"
-        required
-        type="email"
-        placeholder="Email"
-      />
-      {errors.email?.message && <FormError errorMessage={errors.email?.message} />}
-      <LoginPasswordInput
-        {...register("password", {
-          required: "Password is required",
-        })}
-        name="password"
-        type="password"
-        required
-        placeholder="Password"
-      />
+      <LoginInputBox>
+        <InputIcon icon={faUser} />
+        <LoginEmailInput
+          {...register("email", {
+            required: "Email is required",
+          })}
+          name="email"
+          required
+          type="email"
+          placeholder="이메일"
+        />
+      </LoginInputBox>
+      <LoginInputBox>
+        <InputIcon icon={faLock} />
+        <LoginPasswordInput
+          {...register("password", {
+            required: "Password is required",
+          })}
+          name="password"
+          type="password"
+          required
+          placeholder="비밀번호"
+        />
+      </LoginInputBox>
       {errors.password?.message && <FormError errorMessage={errors.password?.message} />}
-      <LoginSubmitButton disabled={loading}>{loading ? "Loading..." : "Log In"}</LoginSubmitButton>
+      <LoginSubmitButton disabled={loading}>{loading ? "Loading..." : "LOG IN"}</LoginSubmitButton>
       {loginMutationResult?.login.error && <FormError errorMessage={loginMutationResult.login.error} />}
     </LoginFormContainer>
   );
@@ -100,26 +107,46 @@ const LoginFormContainer = styled.form`
   align-items: center;
   flex-direction: column;
 `;
+const LoginInputBox = styled.div`
+  width: 90%;
+  max-width: 380px;
+  margin-bottom: 30px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+`;
 
 const LoginEmailInput = styled.input`
   background: white;
-  width: 50%;
-  height: 40px;
+  width: 100%;
+  font-size: 12pt;
+  padding: 15px 20px 15px 45px;
   border: none;
-  margin-bottom: 30px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  transition: box-shadow 0.2s ease-in-out;
   &:focus {
     outline: none;
   }
-`;
-
-const LoginPasswordInput = styled.input`
-  background: white;
-  width: 50%;
-  height: 40px;
-  border: none;
-  &:focus {
-    outline: none;
+  &:focus,
+  &:hover {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   }
 `;
 
-const LoginSubmitButton = styled.button``;
+const LoginPasswordInput = styled(LoginEmailInput)``;
+
+const InputIcon = styled(FontAwesomeIcon)`
+  width: 15px;
+  height: 100%;
+  position: absolute;
+  left: 15px;
+  color: #cccccc;
+`;
+
+const LoginSubmitButton = styled.button`
+  width: 90%;
+  max-width: 380px;
+  height: 70px;
+  border: none;
+  cursor: pointer;
+`;

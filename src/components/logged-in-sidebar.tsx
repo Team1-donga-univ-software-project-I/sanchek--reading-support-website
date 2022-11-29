@@ -40,7 +40,7 @@ export const LoggedInSideBar = () => {
             <SidebarIcon icon={faUser} size="2x" />
           </SidebarUser>
           <SidebarNickname>{data?.me.nickname}</SidebarNickname>
-          <button onClick={logoutOnClick}>로그아웃</button>
+          <SidebarLogoutButton onClick={logoutOnClick}>로그아웃</SidebarLogoutButton>
           <nav>
             <ul>
               <li>
@@ -74,10 +74,12 @@ const SidebarContainer = styled.section<any>`
   background-color: #ffef82;
   width: ${props => (props.fold ? "180px" : "60px")};
   transition: width 0.5s ease-in-out;
-  height: 100vh;
+  height: 100% auto;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
 `;
 
 const SideBarHeader = styled.header`
@@ -148,4 +150,51 @@ const SideFoldText = styled.p`
   font-family: "Sacramento", cursive;
   font-style: italic;
   margin-right: 10px;
+`;
+
+const SidebarLogoutButton = styled.button`
+  align-items: center;
+  background-color: #82954b;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+  min-height: 20px;
+  padding: 5px 30px;
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+  margin-bottom: 50px;
+  white-space: nowrap;
+  overflow: hidden;
+  &:hover,
+  &:focus {
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+    color: white;
+  }
+  &:hover {
+    transform: translateY(-1px);
+  }
+  &:active {
+    background-color: #82954b;
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+    color: white;
+    transform: translateY(0);
+  }
 `;

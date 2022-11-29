@@ -25,7 +25,7 @@ interface SanchekParams {
 export const SanchekPage = () => {
   const { id } = useParams<keyof SanchekParams>() as SanchekParams;
 
-  const { data, loading } = useQuery<sanchekByIdQuery, sanchekByIdQueryVariables>(SANCHEK_QUERY, {
+  const { data } = useQuery<sanchekByIdQuery, sanchekByIdQueryVariables>(SANCHEK_QUERY, {
     variables: {
       input: {
         sanchekId: +id,
@@ -33,12 +33,14 @@ export const SanchekPage = () => {
     },
   });
 
-  console.log(data);
   return (
     <>
       <Helmet>
         <title>산책 | {data?.findSanchekById.sanchek?.title || ""}</title>
       </Helmet>
+      <h1>{data?.findSanchekById.sanchek?.title}</h1>
+      <div>{data?.findSanchekById.sanchek?.author?.nickname}</div>
+      <div>{data?.findSanchekById.sanchek?.content}</div>
     </>
   );
 };
